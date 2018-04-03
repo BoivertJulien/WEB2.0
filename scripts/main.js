@@ -40,13 +40,13 @@ function resizeCanvas() {
 // typiquement dans rectangle.js
 class Etoile {
   constructor() {
-    var rand = Math.random()*(2*Math.PI);
+    var rand = Math.random()*(-Math.PI);
 
     this.x = (canvas.width/2) * Math.cos(rand) + canvas.width/2;
     this.y = (canvas.width/2) * Math.sin(rand) + canvas.height/2;
     
     this.vitesseX = (canvas.width/2 - this.x); // en pixels par image d'animation
-    this.vitesseY = (canvas.height/2 - this.y); // en pixels par image d'animation
+    this.vitesseY = (canvas.height/4 - this.y); // en pixels par image d'animation
     var len = Math.sqrt(this.vitesseX*this.vitesseX + this.vitesseY*this.vitesseY);
     this.vitesseX /= len/4;
     this.vitesseY /= len/4;
@@ -68,8 +68,8 @@ class Etoile {
   move() {
     this.x += this.vitesseX;
     this.y += this.vitesseY;
-    this.vitesseX *= 1.01;
-    this.vitesseY *= 1.01;
+    this.vitesseX /= 1.001;
+    this.vitesseY /= 1.001;
   }
 }
 
@@ -98,7 +98,7 @@ function dessineEtDeplaceLesEtoiles() {
    etoiles.forEach((el,index,object) => {
      el.draw(ctx);
      el.move();
-     if ((Math.abs(el.x - (canvas.width/2)) < 20 && Math.abs(el.y - (canvas.height/2)) < 20)||(el.x > canvas.width || el.x < 0)){
+     if ((Math.abs(el.x - (canvas.width/2)) < 20 && Math.abs(el.y - (canvas.height/4)) < 20)||(el.x > canvas.width || el.x < 0)){
         object.splice(index,1);
      }
    })
@@ -123,7 +123,7 @@ function visualize() {
   ctx.beginPath();
   
   var centerX = canvas.width/2;
-  var centerY = canvas.height/2;
+  var centerY = canvas.height/4;
   var angleWidth = Math.PI /bufferLength;
   var rayon = 250;
 
@@ -207,24 +207,24 @@ function drawVolumeMeter() {
   var average = getAverageVolume(dataArray);
   ctx.beginPath();
   // draw the center circle meter
-  ctx.arc(canvas.width/2, canvas.height/2, 25+(average/4), 0, 2 * Math.PI);
+  ctx.arc(canvas.width/2, canvas.height/4, 25+(average/4), 0, 2 * Math.PI);
   ctx.fill();
 
 //draw the 2 inversed volume meter
   ctx.beginPath();
-  ctx.arc(canvas.width/4, canvas.height/2, 10+((255-average)/4),0,2 * Math.PI, true);
+  ctx.arc(canvas.width/4, canvas.height/4, 10+((255-average)/8),0,2 * Math.PI, true);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(canvas.width/4*3, canvas.height/2, 10+((255-average)/4),0,2 * Math.PI, true);
+  ctx.arc(canvas.width/4*3, canvas.height/4, 10+((255-average)/8),0,2 * Math.PI, true);
   ctx.fill();
 
   ctx.globalCompositeOperation = 'destination-out';
 
   ctx.beginPath();
-  ctx.arc(canvas.width/4, canvas.height/2, (255-average)/4, 0,2 * Math.PI,true);
+  ctx.arc(canvas.width/4, canvas.height/4, (255-average)/8, 0,2 * Math.PI,true);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(canvas.width/4*3, canvas.height/2, (255-average)/4,0,2 * Math.PI, true);
+  ctx.arc(canvas.width/4*3, canvas.height/4, (255-average)/8,0,2 * Math.PI, true);
   ctx.fill();
 
   ctx.restore();
