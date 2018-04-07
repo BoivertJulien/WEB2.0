@@ -9,10 +9,10 @@ let gradient;
 let state; //0 : paused OR 1 : playing
 //menu var
 let cpt = 0;
-let txtA = "$> PRESS 'SPACE' : |";
-let txtB = "$> PRESS 'SPACE' : /";
-let txtC = "$> PRESS 'SPACE' : -";
-let txtD = "$> PR3SS 'SPACE' : \\";
+let txtA = "$> PRE$S 'SPACE' : |";
+let txtB = "$> PRES$ 'SPACE' : /";
+let txtC = "$> PRESS '$PACE' : -";
+let txtD = "$> PRESS 'SPACE' : \\";
 
 let me;
 let badboy;
@@ -87,16 +87,16 @@ function menu(time) {
     visualize();
     measureFPS(time);
 
-    cpt += 1 ;cpt %= 128;
+    cpt += 1 ;cpt %= 64;
     //dessine l'instruction d'ecran d'acceuil
     ctx.save();
     ctx.font="40px sans-serif";
     ctx.fillStyle="white";    
-    if(cpt < 32){
+    if(cpt < 16){
         ctx.fillText(txtA,canvas.height/3,canvas.height/3*2);
-    } else if (cpt < 64){
+    } else if (cpt < 32){
         ctx.fillText(txtB,canvas.height/3,canvas.height/3*2);
-    }else if (cpt < 96){
+    }else if (cpt < 48){
         ctx.fillText(txtC,canvas.height/3,canvas.height/3*2);
     }else {
         ctx.fillText(txtD,canvas.height/3,canvas.height/3*2);
