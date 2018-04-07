@@ -1,5 +1,5 @@
 function buildAudioGraph() {
-    var mediaElement = document.getElementById('player');
+    var mediaElement = player;
     var sourceNode = audioContext.createMediaElementSource(mediaElement);
 
     // Create an analyser node
@@ -15,16 +15,11 @@ function buildAudioGraph() {
 }
 
 function drawVolumeMeter() {
-    // create a vertical gradient of the height of the canvas
-    gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    gradient.addColorStop(0.75, 'pink');
-    gradient.addColorStop(0.5, 'white');
-    gradient.addColorStop(0.25, 'lightBlue');
 
     ctx.save();
 
     // set the fill style to a nice gradient
-    ctx.fillStyle = gradient;
+    ctx.fillStyle = "white";
 
     analyser.getByteFrequencyData(dataArray);
     var average = getAverageVolume(dataArray);
@@ -32,7 +27,7 @@ function drawVolumeMeter() {
     // draw the center circle meter
     ctx.arc(canvas.width / 2, canvas.height / 4, 25 + (average / 4), 0, 2 * Math.PI);
     ctx.fill();
-
+    ctx.fillStyle = "white";
     //draw the 2 inversed volume meter
     ctx.beginPath();
     ctx.arc(canvas.width / 4, canvas.height / 4, 10 + ((255 - average) / 8), 0, 2 * Math.PI, true);
@@ -41,11 +36,12 @@ function drawVolumeMeter() {
     ctx.arc(canvas.width / 4 * 3, canvas.height / 4, 10 + ((255 - average) / 8), 0, 2 * Math.PI, true);
     ctx.fill();
 
-    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = "lightblue";
 
     ctx.beginPath();
     ctx.arc(canvas.width / 4, canvas.height / 4, (255 - average) / 8, 0, 2 * Math.PI, true);
     ctx.fill();
+        ctx.fillStyle = "pink";
     ctx.beginPath();
     ctx.arc(canvas.width / 4 * 3, canvas.height / 4, (255 - average) / 8, 0, 2 * Math.PI, true);
     ctx.fill();

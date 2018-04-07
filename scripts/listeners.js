@@ -27,9 +27,12 @@ defineGameListeners = function(){
     } else if (event.keyCode === 32) {
         if (state == 0){
             state = 1; // FLAG: Arretera l'ancienne animation
+            player.play();
             requestAnimationFrame(animation);
         } else {
             state = 0; // FLAG: Arretera l'ancienne animation
+            player.pause();
+            player.currentTime = 0;
             requestAnimationFrame(menu);
         }
     }
@@ -62,6 +65,6 @@ function getMousePos(evt) {
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight / 100 * 95;
+    canvas.height = window.innerHeight;
     etoiles=[];
 }

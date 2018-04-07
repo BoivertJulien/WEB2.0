@@ -7,6 +7,12 @@ let analyser;
 let dataArray, bufferLength;
 let gradient;
 let state; //0 : paused OR 1 : playing
+//menu var
+let cpt = 0;
+let txtA = "$> PRESS 'SPACE' : |";
+let txtB = "$> PRESS 'SPACE' : /";
+let txtC = "$> PRESS 'SPACE' : -";
+let txtD = "$> PR3SS 'SPACE' : \\";
 
 let me;
 let badboy;
@@ -15,7 +21,7 @@ let badboy;
 function init() {
     // 1 On recupere un pointeur sur le canvas
     canvas = document.querySelector("#myCanvas");
-    player = document.querySelector("#player");
+    player = new Audio('songs/walkit.mp3');
     //player.play();
 
     // 2 On recupere le contexte graphique et audio pour dessiner
@@ -42,7 +48,7 @@ function init() {
 // Boucle d'animation
 // typiquement dans game.js
 function animation(time) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    clearCanvas();
 
     dessineEtDeplaceLesEtoiles();
     drawVolumeMeter();
@@ -81,11 +87,20 @@ function menu(time) {
     visualize();
     measureFPS(time);
 
+    cpt += 1 ;cpt %= 128;
     //dessine l'instruction d'ecran d'acceuil
     ctx.save();
-    ctx.font="30px sans-serif";
-    ctx.fillStyle="white";
-    ctx.fillText("Press 'Space' to Pause/Re-Start Animation",10,canvas.height/10*9);
+    ctx.font="40px sans-serif";
+    ctx.fillStyle="white";    
+    if(cpt < 32){
+        ctx.fillText(txtA,canvas.height/3,canvas.height/3*2);
+    } else if (cpt < 64){
+        ctx.fillText(txtB,canvas.height/3,canvas.height/3*2);
+    }else if (cpt < 96){
+        ctx.fillText(txtC,canvas.height/3,canvas.height/3*2);
+    }else {
+        ctx.fillText(txtD,canvas.height/3,canvas.height/3*2);
+    }
     ctx.restore();
 
     // 4 on rappelle la boucle d'animation 60 fois / s

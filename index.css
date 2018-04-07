@@ -29,5 +29,5 @@ html,body{
   border: 0;
   overflow: hidden; /*  Disable scrollbars */
   display: block;  /* No floating content on sides */
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(20, 20, 30);
 }
