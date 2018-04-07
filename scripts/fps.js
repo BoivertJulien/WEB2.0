@@ -1,7 +1,6 @@
 // vars for counting frames/s, used by the measureFPS function
 var frameCount = 0;
 var lastTime;
-var fpsContainer;
 var fps;
 
 var measureFPS = function(newTime){
@@ -17,8 +16,21 @@ var measureFPS = function(newTime){
      frameCount = 0;
      lastTime = newTime;
    }
-   // and display it in an element we appended to the
-   // document in the start() function
-   fpsContainer.innerHTML = 'FPS: ' + fps;
+
+    ctx.save();
+    ctx.font="16px sans-serif";
+    if (fps > 59){
+      ctx.fillStyle="green";
+      ctx.fillText(fps+" FPS :D",10,30);
+    } else if (fps > 55) {
+      ctx.fillStyle="orange";
+      ctx.fillText(fps+" FPS :|",10,30);
+    } else {
+      ctx.fillStyle="red";
+      ctx.fillText(fps+" FPS ;(",10,30);
+    }
+
+    ctx.restore();
+
    frameCount++;
 };

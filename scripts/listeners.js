@@ -1,6 +1,6 @@
-
-
 defineGameListeners = function(){
+    window.addEventListener('resize', resizeCanvas, false);
+
     // Add the listener to the main, window object, and update the states
     window.addEventListener('keydown', function(event){
     if (event.keyCode === 37) {
@@ -11,8 +11,6 @@ defineGameListeners = function(){
      me.inputStates.right = true;
     } else if (event.keyCode === 40) {
      me.inputStates.down = true;
-    } else if (event.keyCode === 32) {
-     me.inputStates.space = true;
     }
     }, false);
 
@@ -27,7 +25,13 @@ defineGameListeners = function(){
     } else if (event.keyCode === 40) {
      me.inputStates.down = false;
     } else if (event.keyCode === 32) {
-     me.inputStates.space = false;
+        if (state == 0){
+            state = 1; // FLAG: Arretera l'ancienne animation
+            requestAnimationFrame(animation);
+        } else {
+            state = 0; // FLAG: Arretera l'ancienne animation
+            requestAnimationFrame(menu);
+        }
     }
     }, false);
 
@@ -47,7 +51,6 @@ defineGameListeners = function(){
     }, false);
 }
 
-
 function getMousePos(evt) {
    // necessary to take into account CSS boudaries
    var rect = canvas.getBoundingClientRect();
@@ -56,3 +59,9 @@ function getMousePos(evt) {
       y: evt.clientY - rect.top
    };
  }
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight / 100 * 95;
+    etoiles=[];
+}
