@@ -14,35 +14,32 @@ function buildAudioGraph() {
 }
 
 function drawVolumeMeter() {
-
     ctx.save();
-
-    // set the fill style to a nice gradient
-    ctx.fillStyle = "white";
 
     analyser.getByteFrequencyData(dataArray);
     var average = getAverageVolume(dataArray);
-    ctx.beginPath();
-    // draw the center circle meter
-    ctx.arc(canvas.width / 2, canvas.height / 4, 25 + (average / 4), 0, 2 * Math.PI);
-    ctx.fill();
+
     ctx.fillStyle = "white";
+    // draw the center circle meter
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 4, 16 + average / 2, 0, 2 * Math.PI);
+    ctx.fill();
     //draw the 2 inversed volume meter
     ctx.beginPath();
-    ctx.arc(canvas.width / 4, canvas.height / 4, 16 + (255-average) / 4, 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4, canvas.height / 4, 16 + average / 2, 0, 2 * Math.PI, true);
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, 16 + (255-average) / 4, 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, 16 + average / 2, 0, 2 * Math.PI, true);
     ctx.fill();
 
     ctx.fillStyle = "lightblue";
-
     ctx.beginPath();
-    ctx.arc(canvas.width / 4, canvas.height / 4, (255-average) / 4, 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4, canvas.height / 4, average / 2, 0, 2 * Math.PI, true);
     ctx.fill();
-        ctx.fillStyle = "pink";
+
+    ctx.fillStyle = "pink";
     ctx.beginPath();
-    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, (255-average) / 4, 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, average / 2, 0, 2 * Math.PI, true);
     ctx.fill();
 
     ctx.restore();

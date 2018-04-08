@@ -4,9 +4,9 @@ function updatePlayer(joueur){
   if (joueur.inputStates.down) {joueur.y += 6;}
   if (joueur.inputStates.up) {joueur.y -= 6;}
   if (joueur.y >= canvas.height-joueur.size/2){joueur.y = canvas.height-joueur.size/2;}
-  if (joueur.y < joueur.size/2){joueur.y = 10;}
+  if (joueur.y < canvas.height/3*2){joueur.y = canvas.height/3*2;}
   if (joueur.x >= canvas.width-joueur.size/2){joueur.x = canvas.width-joueur.size/2;}
-  if (joueur.x < joueur.size/2){joueur.x = (canvas.width/2)+joueur.size/2;}
+  if (joueur.x < joueur.size/2){joueur.x = joueur.size/2;}
 
   var posMouse = joueur.inputStates.mousePos;
   if (posMouse) {

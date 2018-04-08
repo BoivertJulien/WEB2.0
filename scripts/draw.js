@@ -76,7 +76,7 @@ function clearCanvas() {
     gradient.addColorStop(1, 'blue');
 
     ctx.save();
-
+ 
     // set the fill style to a nice gradient
     ctx.fillStyle = gradient;
 
