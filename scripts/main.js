@@ -1,7 +1,7 @@
 window.onload = init;
 
 let audioCtx = window.AudioContext || window.webkitAudioContext;
-let canvas, ctx, audioContext, player;
+let canvas, ctx, audioContext, introPlayer, Player;
 let etoiles = [];
 let analyser;
 let dataArray, bufferLength;
@@ -21,8 +21,10 @@ let badboy;
 function init() {
     // 1 On recupere un pointeur sur le canvas
     canvas = document.querySelector("#myCanvas");
-    player = new Audio('songs/walkit.mp3');
-    //player.play();
+    introPlayer = new Audio('songs/intro.mp3');
+    introPlayer.loop = true;
+    Player = new Audio('songs/voodooo.mp3');
+    introPlayer.play();
 
     // 2 On recupere le contexte graphique et audio pour dessiner
     // dans le canvas
@@ -80,7 +82,7 @@ function animation(time) {
 // Boucle d'animation
 // typiquement dans game.js
 function menu(time) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    clearCanvas();
 
     dessineEtDeplaceLesEtoiles();
     drawVolumeMeter();
@@ -103,9 +105,16 @@ function menu(time) {
     }
     ctx.restore();
 
+    var rand = Math.random();
+    rect1 = new Etoile();
+    etoiles.push(rect1);
+
     // 4 on rappelle la boucle d'animation 60 fois / s
     if (state == 0){
         requestAnimationFrame(menu);
+    }else {
+        // c'etait la derniere iteration de l'anim , on repasse au menu
+        etoiles=[]; 
     }
 }
 

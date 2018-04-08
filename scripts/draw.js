@@ -82,9 +82,9 @@ function clearCanvas() {
 
     ctx.beginPath();
     ctx.moveTo(0,0);
-    ctx.lineTo(0,canvas.height/2);
+    ctx.lineTo(0,canvas.height/3*2);
     ctx.lineTo(canvas.width/2,canvas.height/4);
-    ctx.lineTo(canvas.width,canvas.height/2);
+    ctx.lineTo(canvas.width,canvas.height/3*2);
     ctx.lineTo(canvas.width,0);
     ctx.fill();
 

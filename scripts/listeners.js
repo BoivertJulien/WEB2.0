@@ -26,13 +26,16 @@ defineGameListeners = function(){
      me.inputStates.down = false;
     } else if (event.keyCode === 32) {
         if (state == 0){
+            introPlayer.pause();
+            introPlayer.currentTime = 0;
             state = 1; // FLAG: Arretera l'ancienne animation
-            player.play();
+            Player.play();
             requestAnimationFrame(animation);
         } else {
             state = 0; // FLAG: Arretera l'ancienne animation
-            player.pause();
-            player.currentTime = 0;
+            Player.pause();
+            Player.currentTime = 0;
+            introPlayer.play();
             requestAnimationFrame(menu);
         }
     }

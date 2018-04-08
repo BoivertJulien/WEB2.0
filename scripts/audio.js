@@ -1,10 +1,9 @@
 function buildAudioGraph() {
-    var mediaElement = player;
-    var sourceNode = audioContext.createMediaElementSource(mediaElement);
+    var sourceNode = audioContext.createMediaElementSource(Player);
 
     // Create an analyser node
     analyser = audioContext.createAnalyser();
-
+  
     // Try changing for lower values: 512, 256, 128, 64...
     analyser.fftSize = 512;
     bufferLength = analyser.frequencyBinCount;
@@ -30,20 +29,20 @@ function drawVolumeMeter() {
     ctx.fillStyle = "white";
     //draw the 2 inversed volume meter
     ctx.beginPath();
-    ctx.arc(canvas.width / 4, canvas.height / 4, 10 + ((255 - average) / 8), 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4, canvas.height / 4, 16 + (255-average) / 4, 0, 2 * Math.PI, true);
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, 10 + ((255 - average) / 8), 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, 16 + (255-average) / 4, 0, 2 * Math.PI, true);
     ctx.fill();
 
     ctx.fillStyle = "lightblue";
 
     ctx.beginPath();
-    ctx.arc(canvas.width / 4, canvas.height / 4, (255 - average) / 8, 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4, canvas.height / 4, (255-average) / 4, 0, 2 * Math.PI, true);
     ctx.fill();
         ctx.fillStyle = "pink";
     ctx.beginPath();
-    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, (255 - average) / 8, 0, 2 * Math.PI, true);
+    ctx.arc(canvas.width / 4 * 3, canvas.height / 4, (255-average) / 4, 0, 2 * Math.PI, true);
     ctx.fill();
 
     ctx.restore();
@@ -52,8 +51,6 @@ function drawVolumeMeter() {
 
 function getAverageVolume(array) {
     var values = 0;
-    var average;
-
     var length = array.length;
 
     // get all the frequency amplitudes
@@ -61,18 +58,10 @@ function getAverageVolume(array) {
         values += array[i];
     }
 
-    average = values / length;
-    return average;
+    return values / length;
 }
 
 function visualize() {
-    // clear the canvas
-    // like this: canvasContext.clearRect(0, 0, width, height);
-
-    // Or use rgba fill to give a slight blur effect
-    //ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
-    //ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     // Get the analyser data
     analyser.getByteTimeDomainData(dataArray);
 
@@ -86,16 +75,13 @@ function visualize() {
     var centerX = canvas.width / 2;
     var centerY = canvas.height / 4;
     var angleWidth = Math.PI / bufferLength;
-    var rayon = 250;
 
     for (var i = 0; i < bufferLength; i++) {
         var angle = i * angleWidth;
-        // normalize the value, now between 0 and 1
-        var v = dataArray[i] / 510;
-
+        var v = (255+dataArray[i])/4;
         // We draw from y=0 to height
-        var x = rayon * Math.sin(angle) * v;
-        var y = rayon * Math.cos(angle) * v;
+        var x = Math.sin(angle) * v;
+        var y = Math.cos(angle) * v;
 
         if (i === 0) {
             //ctx.moveTo(centerX, centerY+rayon/2);
@@ -114,12 +100,10 @@ function visualize() {
 
     for (var i = 0; i < bufferLength; i++) {
         var angle = (i * angleWidth) + Math.PI;
-        // normalize the value, now between 0 and 1
-        var v = dataArray[i] / 510;
-
+        var v = (255+dataArray[i])/4;
         // We draw from y=0 to height
-        var x = rayon * Math.sin(angle) * v;
-        var y = rayon * Math.cos(angle) * v;
+        var x =  Math.sin(angle) * v;
+        var y = Math.cos(angle) * v;
 
         if (i === 0) {
             //ctx.moveTo(centerX, centerY+rayon/2);

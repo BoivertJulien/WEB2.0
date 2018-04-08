@@ -5,7 +5,7 @@ class Etoile {
         var rand = Math.random() * (-Math.PI);
 
         this.x = (canvas.width / 2) * Math.cos(rand) + canvas.width / 2;
-        this.y = (canvas.width / 2) * Math.sin(rand) + canvas.height / 2;
+        this.y = (canvas.width / 2) * Math.sin(rand) + canvas.height / 4;
 
         this.vitesseX = (canvas.width / 2 - this.x); // en pixels par image d'animation
         this.vitesseY = (canvas.height / 4 - this.y); // en pixels par image d'animation
