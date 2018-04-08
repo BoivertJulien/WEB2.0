@@ -1,20 +1,53 @@
 
-function drawPerso(player) {
+function drawMe() {
   ctx.save();
-  ctx.fillStyle="green";
+  ctx.fillStyle="pink";
 
-  //ctx.translate(player.x-(player.size/2), player.y-(player.size/2));
-  ctx.translate(player.x, player.y);
-  ctx.rotate(player.angle);
-  ctx.translate(-player.size/2, -player.size/2);
-  ctx.strokeRect(0, 0, player.size, player.size);
-  ctx.fillRect(player.size/4, player.size/4, player.size/2, player.size/2);
+  ctx.translate(me.x, me.y);
+  ctx.rotate(me.angle);
+  ctx.translate(-me.size/2, -me.size/2);
+  ctx.strokeRect(0, 0, me.size, me.size);
+  ctx.fillRect(me.size/4, me.size/4, me.size/2, me.size/2);
+
+  ctx.restore();
+}
+
+function drawBadBoy() {
+  ctx.save();
+  ctx.fillStyle = "#193467";
+  ctx.beginPath();
+  ctx.arc(badboy.x, badboy.y, badboy.size*2,0, 2 * Math.PI);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(badboy.x, badboy.y+badboy.size*2, badboy.size/2,0, 2 * Math.PI);
+  ctx.fill();
+  ctx.fillStyle="lightblue";
+  ctx.beginPath();
+  ctx.arc(badboy.x, badboy.y+badboy.size*2, badboy.size/3,0, 2 * Math.PI);
+  ctx.fill();
+  ctx.fillStyle="white";
+  ctx.beginPath();
+  ctx.arc(badboy.x - badboy.size, badboy.y, badboy.size,0, 2 * Math.PI);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(badboy.x + badboy.size, badboy.y, badboy.size,0, 2 * Math.PI);
+  ctx.fill();
+  ctx.fillStyle="#990000";
+
+  var angle = Math.atan2((me.y - badboy.y),(me.x - badboy.x));
+  ctx.beginPath();
+  ctx.arc(badboy.x - badboy.size + badboy.size/2*Math.cos(angle), badboy.y+badboy.size/2*Math.sin(angle), badboy.size/4,0, 2 * Math.PI);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(badboy.x + badboy.size + badboy.size/2*Math.cos(angle), badboy.y+badboy.size/2*Math.sin(angle), badboy.size/4,0, 2 * Math.PI);
+  ctx.fill();
 
   ctx.restore();
 }
 
 function drawAttacksOfPerso(player){
   ctx.save();
+  ctx.fillStyle="pink"; 
   player.attacks.forEach(function(item){
     ctx.translate(item.x-(item.size/2), item.y-(item.size/2));
     ctx.fillRect(0,0,item.size,item.size);

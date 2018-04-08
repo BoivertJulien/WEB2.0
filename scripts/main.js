@@ -55,8 +55,8 @@ function animation(time) {
     visualize();
     measureFPS(time);
 
-    drawPerso(me);
-    drawPerso(badboy);
+    drawMe();
+    drawBadBoy();
     drawAttacksOfPerso(me);
     drawAttacksOfPerso(badboy);
     updatePlayer(me);
