@@ -58,13 +58,20 @@ function drawAttacksOfPerso(player){
 // Clears the canvas content
 function clearCanvas() {
    ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // create a vertical gradient of the height of the canvas
-    gradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
+  gradient = ctx.createLinearGradient(0, 0, canvas.width,0);
     gradient.addColorStop(0, 'black');
-    gradient.addColorStop(0.40, 'blue');
-    gradient.addColorStop(0.48, 'lightblue');
-    gradient.addColorStop(0.5, 'pink');
-    gradient.addColorStop(1, 'magenta');
+    gradient.addColorStop(0.5, '#000033');
+    gradient.addColorStop(1, 'black');
+    ctx.fillStyle = gradient;
+   ctx.fillRect(0,0,canvas.width, canvas.height)
+      // create a vertical gradient of the height of the canvas
+    gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, 'black');
+    gradient.addColorStop(0.20, 'blue');
+    gradient.addColorStop(0.24, 'lightblue');
+    gradient.addColorStop(0.25, 'pink');
+    gradient.addColorStop(0.5, 'magenta');
+    gradient.addColorStop(1, 'blue');
 
     ctx.save();
 
@@ -79,6 +86,25 @@ function clearCanvas() {
     ctx.lineTo(canvas.width,0);
     ctx.fill();
 
+    ctx.strokeStyle = gradient;
+
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.moveTo(0,canvas.height/32*9);
+    ctx.lineTo(canvas.width,canvas.height/32*9);   
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = 4;
+    ctx.moveTo(0,canvas.height/32*11);
+    ctx.lineTo(canvas.width,canvas.height/32*11);    
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth = 20;
+    ctx.moveTo(0,canvas.height/32*18);
+    ctx.lineTo(canvas.width,canvas.height/32*18);  
+    ctx.stroke();
 
     ctx.restore();
 }

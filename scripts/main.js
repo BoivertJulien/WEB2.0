@@ -38,7 +38,7 @@ function init() {
     // Draw canvas border for the first time.
     resizeCanvas();
     me={x:canvas.width/2,y:canvas.height/8*7,size:25,angle:0,dead:false,inputStates:{},attacks:[]};
-    badboy= {x:canvas.width/2,y:canvas.height/2,size:25,angle:0,dead:false,inputStates:{},attacks:[]};
+    badboy= {x:canvas.width/2,y:canvas.height/16*6,size:25,angle:0,dead:false,inputStates:{},attacks:[]};
     // on demarre l'animation
     state = 0;
     requestAnimationFrame(menu);
