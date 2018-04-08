@@ -27,10 +27,12 @@ function drawBadBoy() {
   ctx.fill();
   ctx.fillStyle="white";
   ctx.beginPath();
-  ctx.arc(badboy.x - badboy.size, badboy.y, badboy.size,0, 2 * Math.PI);
+  //ctx.arc(badboy.x - badboy.size, badboy.y, badboy.size,2*Math.PI-Math.PI/8,Math.PI); pleure
+  ctx.arc(badboy.x - badboy.size, badboy.y, badboy.size,Math.PI/8,Math.PI+Math.PI/8);//colere
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(badboy.x + badboy.size, badboy.y, badboy.size,0, 2 * Math.PI);
+  //ctx.arc(badboy.x + badboy.size, badboy.y, badboy.size,0, Math.PI+Math.PI/8); pleure
+  ctx.arc(badboy.x + badboy.size, badboy.y, badboy.size,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
   ctx.fill();
   ctx.fillStyle="#990000";
 
@@ -85,26 +87,6 @@ function clearCanvas() {
     ctx.lineTo(canvas.width,canvas.height/2);
     ctx.lineTo(canvas.width,0);
     ctx.fill();
-
-    ctx.strokeStyle = gradient;
-
-    ctx.beginPath();
-    ctx.lineWidth = 1;
-    ctx.moveTo(0,canvas.height/32*9);
-    ctx.lineTo(canvas.width,canvas.height/32*9);   
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.lineWidth = 4;
-    ctx.moveTo(0,canvas.height/32*11);
-    ctx.lineTo(canvas.width,canvas.height/32*11);    
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.lineWidth = 20;
-    ctx.moveTo(0,canvas.height/32*18);
-    ctx.lineTo(canvas.width,canvas.height/32*18);  
-    ctx.stroke();
 
     ctx.restore();
 }
