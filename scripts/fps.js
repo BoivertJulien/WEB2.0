@@ -29,7 +29,6 @@ var measureFPS = function(newTime){
       ctx.fillStyle="red";
       ctx.fillText(fps+" FPS ;(",10,30);
     }
-
     ctx.restore();
 
    frameCount++;

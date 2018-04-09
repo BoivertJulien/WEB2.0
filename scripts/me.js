@@ -1,0 +1,68 @@
+class Me {
+    constructor() {
+        this.x = canvas.width / 2;
+        this.y = canvas.height/4*3;
+        this.size = 75;
+        this.life = 100;
+        this.inputStates={};
+        this.attacks = [];
+
+    }
+
+    draw(ctx) {
+      //draw perso
+        ctx.save();
+        ctx.fillStyle="pink";
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.translate(-this.size/2, -this.size/2);
+        ctx.strokeRect(0, 0, this.size, this.size);
+        ctx.fillRect(this.size/4, this.size/4, this.size/2, this.size/2);
+
+        ctx.restore();
+
+      //Draw all attacks
+        ctx.fillStyle="orange"; 
+        this.attacks.forEach(function(item){
+          ctx.save();
+          ctx.translate(item.x-5, item.y-5);
+          ctx.fillRect(0,0,10,10);
+          ctx.restore();
+        });
+    }
+
+    update(){
+        //move
+        if (this.inputStates.left) {this.x -= 10;}
+        if (this.inputStates.right) {this.x += 10;}
+        if (this.inputStates.down) {this.y += 6;}
+        if (this.inputStates.up) {this.y -= 6;}
+        if (this.y >= canvas.height-this.size/2){this.y = canvas.height-this.size/2;}
+        if (this.y < canvas.height/3*2){this.y = canvas.height/3*2;}
+        if (this.x >= canvas.width-this.size/2){this.x = canvas.width-this.size/2;}
+        if (this.x < this.size/2){this.x = this.size/2;}
+
+        var posMouse = this.inputStates.mousePos;
+        if (posMouse) {
+          var angle = Math.atan2((this.y - posMouse.y),(this.x - posMouse.x));
+          this.angle = angle;
+        }
+        if (playerCollideAttacks(this,badboy.attacks)) this.dead = true; 
+
+          var toremove = [];
+          var i=0;
+          this.attacks.forEach(function(item){
+            if (isOutOfScreen(item)){
+              toremove.push(i);
+            } else {i++;}
+            item.x += item.dx;
+            item.y += item.dy;
+            //i++;
+          });
+          for(i=0;i<toremove.length;i++){
+            this.attacks.splice(toremove[i],1);
+          }
+
+    }
+
+}

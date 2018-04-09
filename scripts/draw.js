@@ -1,62 +1,3 @@
-
-function drawMe() {
-  ctx.save();
-  ctx.fillStyle="pink";
-
-  ctx.translate(me.x, me.y);
-  ctx.rotate(me.angle);
-  ctx.translate(-me.size/2, -me.size/2);
-  ctx.strokeRect(0, 0, me.size, me.size);
-  ctx.fillRect(me.size/4, me.size/4, me.size/2, me.size/2);
-
-  ctx.restore();
-}
-
-function drawBadBoy() {
-  ctx.save();
-  ctx.fillStyle = "#193467";
-  ctx.beginPath();
-  ctx.arc(badboy.x, badboy.y, badboy.size*2,0, 2 * Math.PI);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(badboy.x, badboy.y+badboy.size*2, badboy.size/2,0, 2 * Math.PI);
-  ctx.fill();
-  ctx.fillStyle="lightblue";
-  ctx.beginPath();
-  ctx.arc(badboy.x, badboy.y+badboy.size*2, badboy.size/3,0, 2 * Math.PI);
-  ctx.fill();
-  ctx.fillStyle="white";
-  ctx.beginPath();
-  //ctx.arc(badboy.x - badboy.size, badboy.y, badboy.size,2*Math.PI-Math.PI/8,Math.PI); pleure
-  ctx.arc(badboy.x - badboy.size, badboy.y, badboy.size,Math.PI/8,Math.PI+Math.PI/8);//colere
-  ctx.fill();
-  ctx.beginPath();
-  //ctx.arc(badboy.x + badboy.size, badboy.y, badboy.size,0, Math.PI+Math.PI/8); pleure
-  ctx.arc(badboy.x + badboy.size, badboy.y, badboy.size,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
-  ctx.fill();
-  ctx.fillStyle="#990000";
-
-  var angle = Math.atan2((me.y - badboy.y),(me.x - badboy.x));
-  ctx.beginPath();
-  ctx.arc(badboy.x - badboy.size + badboy.size/2*Math.cos(angle), badboy.y+badboy.size/2*Math.sin(angle), badboy.size/4,0, 2 * Math.PI);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(badboy.x + badboy.size + badboy.size/2*Math.cos(angle), badboy.y+badboy.size/2*Math.sin(angle), badboy.size/4,0, 2 * Math.PI);
-  ctx.fill();
-
-  ctx.restore();
-}
-
-function drawAttacksOfPerso(player){
-  ctx.save();
-  ctx.fillStyle="pink"; 
-  player.attacks.forEach(function(item){
-    ctx.translate(item.x-(item.size/2), item.y-(item.size/2));
-    ctx.fillRect(0,0,item.size,item.size);
-    ctx.restore();
-  });
-}
-
 // Clears the canvas content
 function clearCanvas() {
    ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,5 +29,23 @@ function clearCanvas() {
     ctx.lineTo(canvas.width,0);
     ctx.fill();
 
+    ctx.restore();
+}
+
+
+function drawAnimatedTextMenu(){
+        //dessine l'instruction d'ecran d'acceuil
+    ctx.save();
+    ctx.font="40px sans-serif";
+    ctx.fillStyle="white";    
+    if(cpt < 16){
+        ctx.fillText(txtA,canvas.height/3,canvas.height/3*2);
+    } else if (cpt < 32){
+        ctx.fillText(txtB,canvas.height/3,canvas.height/3*2);
+    }else if (cpt < 48){
+        ctx.fillText(txtC,canvas.height/3,canvas.height/3*2);
+    }else {
+        ctx.fillText(txtD,canvas.height/3,canvas.height/3*2);
+    }
     ctx.restore();
 }

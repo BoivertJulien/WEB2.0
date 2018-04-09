@@ -21,9 +21,9 @@ let badboy;
 function init() {
     // 1 On recupere un pointeur sur le canvas
     canvas = document.querySelector("#myCanvas");
+    Player = new Audio('songs/voodooo.mp3');
     introPlayer = new Audio('songs/intro.mp3');
     introPlayer.loop = true;
-    Player = new Audio('songs/voodooo.mp3');
     introPlayer.play();
 
     // 2 On recupere le contexte graphique et audio pour dessiner
@@ -35,12 +35,14 @@ function init() {
     // 3 on dessine pour verifier que ca marche
     //ctx.fillStyle = 'red';
     //ctx.fillRect(10, 10, 100, 100);
-    defineGameListeners();
 
     // Draw canvas border for the first time.
     resizeCanvas();
-    me={x:canvas.width/2,y:canvas.height/8*7,size:25,angle:0,dead:false,inputStates:{},attacks:[]};
-    badboy= {x:canvas.width/2,y:canvas.height/16*6,size:25,angle:0,dead:false,inputStates:{},attacks:[]};
+    me=new Me();
+    badboy= new Badboy();
+
+    defineGameListeners();
+
     // on demarre l'animation
     state = 0;
     requestAnimationFrame(menu);
@@ -57,14 +59,10 @@ function animation(time) {
     visualize();
     measureFPS(time);
 
-    drawMe();
-    drawBadBoy();
-    drawAttacksOfPerso(me);
-    drawAttacksOfPerso(badboy);
-    updatePlayer(me);
-    updatePlayer(badboy);
-    updateAttacks(me);
-    updateAttacks(badboy);
+    me.draw(ctx);
+    badboy.draw(ctx);
+    me.update();
+    badboy.update();
 
     var rand = Math.random();
     rect1 = new Etoile();
@@ -90,20 +88,8 @@ function menu(time) {
     measureFPS(time);
 
     cpt += 1 ;cpt %= 64;
-    //dessine l'instruction d'ecran d'acceuil
-    ctx.save();
-    ctx.font="40px sans-serif";
-    ctx.fillStyle="white";    
-    if(cpt < 16){
-        ctx.fillText(txtA,canvas.height/3,canvas.height/3*2);
-    } else if (cpt < 32){
-        ctx.fillText(txtB,canvas.height/3,canvas.height/3*2);
-    }else if (cpt < 48){
-        ctx.fillText(txtC,canvas.height/3,canvas.height/3*2);
-    }else {
-        ctx.fillText(txtD,canvas.height/3,canvas.height/3*2);
-    }
-    ctx.restore();
+
+drawAnimatedTextMenu();
 
     var rand = Math.random();
     rect1 = new Etoile();
