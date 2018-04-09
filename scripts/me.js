@@ -33,10 +33,10 @@ class Me {
 
     update(){
         //move
-        if (this.inputStates.left) {this.x -= 10;}
-        if (this.inputStates.right) {this.x += 10;}
-        if (this.inputStates.down) {this.y += 6;}
-        if (this.inputStates.up) {this.y -= 6;}
+        if (this.inputStates.left) {this.x -= 14;}
+        if (this.inputStates.right) {this.x += 14;}
+        if (this.inputStates.down) {this.y += 8;}
+        if (this.inputStates.up) {this.y -= 8;}
         if (this.y >= canvas.height-this.size/2){this.y = canvas.height-this.size/2;}
         if (this.y < canvas.height/3*2){this.y = canvas.height/3*2;}
         if (this.x >= canvas.width-this.size/2){this.x = canvas.width-this.size/2;}
@@ -47,7 +47,14 @@ class Me {
           var angle = Math.atan2((this.y - posMouse.y),(this.x - posMouse.x));
           this.angle = angle;
         }
-        if (playerCollideAttacks(this,badboy.attacks)) this.dead = true; 
+
+        var indexCollision = playerCollideAttacks(this,badboy.attacks);
+        if (indexCollision != -1) {
+          this.life -= 1; 
+          delete badboy.attacks[indexCollision];
+          badboy.attacks.splice(indexCollision,1);
+          if (this.life <= 0){}
+        }
 
           var toremove = [];
           var i=0;
@@ -57,9 +64,9 @@ class Me {
             } else {i++;}
             item.x += item.dx;
             item.y += item.dy;
-            //i++;
           });
           for(i=0;i<toremove.length;i++){
+            delete this.attacks[toremove[i]];
             this.attacks.splice(toremove[i],1);
           }
 

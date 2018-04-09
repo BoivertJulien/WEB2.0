@@ -30,7 +30,5 @@ class Etoile {
     move() {
         this.x += this.vitesseX;
         this.y += this.vitesseY;
-        //this.vitesseX /= 1.001;
-        //this.vitesseY /= 1.001;
     }
 }

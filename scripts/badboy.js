@@ -2,7 +2,7 @@ class Badboy {
     constructor() {
         this.x = canvas.width / 2;
         this.y = canvas.height/4;
-        this.size = 25;
+        this.size = 30;
         this.life = 100;
         this.inputStates={};
         this.attacks = [];
@@ -72,8 +72,9 @@ class Badboy {
                 var dxUnorm=me.x - this.x;
                 var dyUnorm= me.y - this.y;
                 var vectorNormalize = Math.sqrt((dxUnorm*dxUnorm)+(dyUnorm*dyUnorm));
-                newAtk.dx = (dxUnorm/vectorNormalize)*14;
-                newAtk.dy = (dyUnorm/vectorNormalize)*14;
+                newAtk.dx = (dxUnorm/vectorNormalize)*20;
+                newAtk.dy = (dyUnorm/vectorNormalize)*20;
+                newAtk.size=10;
                 this.attacks.push(newAtk);
           }
         } else {
@@ -83,10 +84,21 @@ class Badboy {
             var dxUnorm=this.xTarget - this.x;
             var dyUnorm= this.yTarget - this.y;
             var vectorNormalize = Math.sqrt((dxUnorm*dxUnorm)+(dyUnorm*dyUnorm));
-            this.vitesseX = (dxUnorm/vectorNormalize)*6;
-            this.vitesseY = (dyUnorm/vectorNormalize)*6;
+            this.vitesseX = (dxUnorm/vectorNormalize)*8;
+            this.vitesseY = (dyUnorm/vectorNormalize)*8;
             this.moving = true;
         }
+
+        var indexCollision = playerCollideAttacks(this,me.attacks);
+
+        if (indexCollision != -1) {
+          this.life -= 1; 
+          delete me.attacks[indexCollision];
+          me.attacks.splice(indexCollision,1);
+          
+          if (this.life <= 0){ }
+        }        
+
 
       var toremove = [];
       var i=0;
@@ -99,6 +111,7 @@ class Badboy {
         //i++;
       });
       for(i=0;i<toremove.length;i++){
+        delete this.attacks[toremove[i]];
         this.attacks.splice(toremove[i],1);
       }
 

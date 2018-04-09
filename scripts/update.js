@@ -1,10 +1,11 @@
 function playerCollideAttacks(joueur,atks){
-  atks.forEach(function(atk){
-    if ((Math.abs(joueur.x - atk.x)<(joueur.size+atk.size)) && (Math.abs(joueur.y - atk.y)<(joueur.size+atk.size))) {
-      return true;
+  var collide = -1;
+  atks.every(function(atk,index){
+    if ((Math.abs(joueur.x - atk.x)<(joueur.size/2+atk.size/2)) && (Math.abs(joueur.y - atk.y)<(joueur.size/2+atk.size/2))) {
+      collide = index;
     }
   });
-  return false;
+  return collide;
 }
 
 function isOutOfScreen(pos){ //approximation pour missiles

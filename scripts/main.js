@@ -88,8 +88,7 @@ function menu(time) {
     measureFPS(time);
 
     cpt += 1 ;cpt %= 64;
-
-drawAnimatedTextMenu();
+    drawAnimatedTextMenu();
 
     var rand = Math.random();
     rect1 = new Etoile();
@@ -106,11 +105,19 @@ drawAnimatedTextMenu();
 
 
 function dessineEtDeplaceLesEtoiles() {
-    etoiles.forEach((el, index, object) => {
+    var toRemove = [];
+    var index = 0;
+    etoiles.forEach((el) => {
         el.draw(ctx);
         el.move();
         if ((Math.abs(el.x - (canvas.width / 2)) < 20 && Math.abs(el.y - (canvas.height / 4)) < 20) || (el.x > canvas.width || el.x < 0)) {
-            object.splice(index, 1);
+            toRemove.push(index);
+        } else {
+            index++;
         }
-    })
+    });
+    for (var i=0; i < toRemove.length; i++){
+        delete etoiles[toRemove[i]];
+        etoiles.splice(toRemove[i], 1);
+    }
 }
