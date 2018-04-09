@@ -25,8 +25,8 @@ class Me {
         ctx.fillStyle="orange"; 
         this.attacks.forEach(function(item){
           ctx.save();
-          ctx.translate(item.x-5, item.y-5);
-          ctx.fillRect(0,0,10,10);
+          ctx.translate(item.x-8, item.y-8);
+          ctx.fillRect(0,0,16,16);
           ctx.restore();
         });
     }
