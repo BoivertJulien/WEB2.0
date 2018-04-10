@@ -49,10 +49,10 @@ class Badboy {
           ctx.beginPath();
           ctx.arc(this.x + this.size + this.size/2*Math.cos(angle), this.y+this.size/2*Math.sin(angle), this.size/4,0, 2 * Math.PI);
           ctx.fill();
- 
+
           ctx.restore();
 
-          ctx.fillStyle="orange"; 
+          ctx.fillStyle="orange";
           this.attacks.forEach(function(item){
             ctx.save();
             ctx.translate(item.x-25, item.y-25);
@@ -92,12 +92,12 @@ class Badboy {
         var indexCollision = playerCollideAttacks(this,me.attacks);
 
         if (indexCollision != -1) {
-          this.life -= 1; 
+          this.life -= 1;
           delete me.attacks[indexCollision];
           me.attacks.splice(indexCollision,1);
-          
+
           if (this.life <= 0){ }
-        }        
+        }
 
 
       var toremove = [];

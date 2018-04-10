@@ -45,6 +45,8 @@ function init() {
 
     // on demarre l'animation
     state = 0;
+    setInterval(animateGradient, 50);
+    animateGradient();
     requestAnimationFrame(menu);
 }
 
@@ -73,7 +75,7 @@ function animation(time) {
         requestAnimationFrame(animation);
     } else {
         // c'etait la derniere iteration de l'anim , on repasse au menu
-        etoiles=[]; 
+        etoiles=[];
     }
 }
 
@@ -99,7 +101,7 @@ function menu(time) {
         requestAnimationFrame(menu);
     }else {
         // c'etait la derniere iteration de l'anim , on repasse au menu
-        etoiles=[]; 
+        etoiles=[];
     }
 }
 
