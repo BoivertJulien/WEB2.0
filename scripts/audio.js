@@ -3,13 +3,18 @@ function buildAudioGraph() {
 
     // Create an analyser node
     analyser = audioContext.createAnalyser();
-  
+
     // Try changing for lower values: 512, 256, 128, 64...
     analyser.fftSize = 512;
     bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
 
-    sourceNode.connect(analyser);
+    bqf = audioContext.createBiquadFilter();
+    bqf.frequency.value=500;
+
+    sourceNode.connect(bqf);
+    bqf.connect(analyser);
+    //lfo.start();
     analyser.connect(audioContext.destination);
 }
 

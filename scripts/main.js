@@ -1,7 +1,7 @@
 window.onload = init;
 
 let audioCtx = window.AudioContext || window.webkitAudioContext;
-let canvas, ctx, audioContext, introPlayer, Player;
+let canvas, ctx, audioContext, introPlayer, Player,bqf;
 let etoiles = [];
 let analyser;
 let dataArray, bufferLength;
