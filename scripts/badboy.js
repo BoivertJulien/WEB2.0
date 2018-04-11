@@ -97,8 +97,6 @@ class Badboy {
           me.attacks.splice(indexCollision,1);
 
           if (this.life <= 0){ }
-        } else {
-          bqf.frequency.value = this.x*10;
         }
 
 

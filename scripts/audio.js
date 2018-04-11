@@ -10,12 +10,22 @@ function buildAudioGraph() {
     dataArray = new Uint8Array(bufferLength);
 
     bqf = audioContext.createBiquadFilter();
-    bqf.frequency.value=500;
-
+    bqf.frequency.value=100;
+    //bqf.type = "lowpass";
+    stereo = audioContext.createStereoPanner();
+    stereo.pan.value = 0;
     sourceNode.connect(bqf);
-    bqf.connect(analyser);
-    //lfo.start();
+    bqf.connect(stereo);
+    stereo.connect(analyser);
     analyser.connect(audioContext.destination);
+
+}
+
+function updateAudioEffects(){
+    var distRelX = (me.x - badboy.x), distRelY = (me.y - badboy.y);
+    var distanceBADBOY =Math.sqrt(Math.abs(parseInt(distRelX*distRelX-distRelY*distRelY)));
+    bqf.frequency.value = 200 + distanceBADBOY*8;
+    stereo.pan.value = (badboy.x-canvas.width/2)/(canvas.width/2)*2;
 }
 
 function drawVolumeMeter() {

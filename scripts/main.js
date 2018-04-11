@@ -17,6 +17,7 @@ let txtD = "$> PRESS 'SPACE' : \\";
 let me;
 let badboy;
 
+
 // main.js
 function init() {
     // 1 On recupere un pointeur sur le canvas
@@ -55,7 +56,8 @@ function init() {
 // typiquement dans game.js
 function animation(time) {
     clearCanvas();
-
+    
+    updateAudioEffects();
     dessineEtDeplaceLesEtoiles();
     drawVolumeMeter();
     visualize();
