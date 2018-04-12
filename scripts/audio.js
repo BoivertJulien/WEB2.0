@@ -18,14 +18,14 @@ function buildAudioGraph() {
     bqf.connect(stereo);
     stereo.connect(analyser);
     analyser.connect(audioContext.destination);
-
 }
 
 function updateAudioEffects(){
+    var distMax = Math.sqrt((canvas.width*canvas.width)-(canvas.height*canvas.height));
     var distRelX = (me.x - badboy.x), distRelY = (me.y - badboy.y);
-    var distanceBADBOY =Math.sqrt(Math.abs(parseInt(distRelX*distRelX-distRelY*distRelY)));
-    bqf.frequency.value = 200 + distanceBADBOY*8;
-    stereo.pan.value = (badboy.x-canvas.width/2)/(canvas.width/2)*2;
+    var distanceBADBOY =Math.sqrt(Math.abs(parseInt(distRelX*distRelX-distRelY*distRelY)))/distMax;
+    bqf.frequency.value = 100 + (distanceBADBOY)*4096;
+    stereo.pan.value = (badboy.x-canvas.width/2)/(canvas.width/2);
 }
 
 function drawVolumeMeter() {
