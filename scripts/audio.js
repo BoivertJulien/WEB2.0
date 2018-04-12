@@ -23,7 +23,7 @@ function buildAudioGraph() {
 function updateAudioEffects(){
     var distRelX = (me.x - badboy.x), distRelY = (me.y - badboy.y);
     var distanceBADBOY =Math.sqrt(Math.abs(parseInt(distRelX*distRelX-distRelY*distRelY)))/distanceMax;
-    bqf.frequency.value = parseFloat(200 + (distanceBADBOY*4096)).toPrecision(10);
+    bqf.frequency.value = parseFloat(2048 + (distanceBADBOY*2048)).toPrecision(4); //POURQUOI cette erreur : "non-finite floating point" !! A demander
     stereo.pan.value = (badboy.x-canvas.width/2)/(canvas.width/2);
 }
 

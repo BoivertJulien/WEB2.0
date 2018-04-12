@@ -1,5 +1,5 @@
 var gi = [0, 0.24, 0.30,0.46,0.59,0.71,0.88,1];
-var gc = ["#f80c12", "#ff9933", "#e0d510", "#69d025","#12bdb9", "#5555ee", "#3311bb", "#f80c12"];
+var gc = ['rgba(248,12,18,1)', "#ff9933", "#e0d510", "#69d025","#12bdb9", "#5555ee", "#3311bb", "#f80c12"];
 var offset = 0.02;
 var grdFloor;
 
@@ -7,16 +7,16 @@ var grdFloor;
 function clearCanvas() {
    // create a vertical gradient to draw sky
  gradient = ctx.createLinearGradient(0, 0, 0, canvas.height/4);
- gradient.addColorStop(0, 'black');
- gradient.addColorStop(0.80, 'blue');
- gradient.addColorStop(1, 'lightblue');
+ gradient.addColorStop(0, 'rgba(0,0,0,0.3)');
+ gradient.addColorStop(0.80, 'rgba(0, 0, 255,0.3)');
+ gradient.addColorStop(1, 'rgba(173, 216, 230,0.3)');
  ctx.fillStyle = gradient;
- ctx.fillRect(0,0,canvas.width, canvas.height/4)
+ ctx.fillRect(0,0,canvas.width, canvas.height/4);
 
   gradient = ctx.createLinearGradient(0, 0, canvas.width,0);
-    gradient.addColorStop(0, 'black');
-    gradient.addColorStop(0.5, '#000033');
-    gradient.addColorStop(1, 'black');
+    gradient.addColorStop(0, 'rgba(0,0,0,0.8)');
+    gradient.addColorStop(0.5, 'rgba(0, 0, 51,0.8)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0.8)');
     ctx.fillStyle = gradient;
    ctx.fillRect(0,canvas.height/4,canvas.width, canvas.height/4*3)
 

@@ -22,7 +22,7 @@ class Me {
         ctx.restore();
 
       //Draw all attacks
-        ctx.fillStyle="orange"; 
+        ctx.fillStyle="yellow"; 
         this.attacks.forEach(function(item){
           ctx.save();
           ctx.translate(item.x-8, item.y-8);

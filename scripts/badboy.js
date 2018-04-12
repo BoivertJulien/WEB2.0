@@ -20,7 +20,7 @@ class Badboy {
         // la fin
         ctx.save();
 
-          ctx.fillStyle = "#193467";
+          ctx.fillStyle = "orange";
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size*2,0, 2 * Math.PI);
           ctx.fill();
@@ -40,7 +40,7 @@ class Badboy {
           //ctx.arc(this.x + this.size, this.y, this.size,0, Math.PI+Math.PI/8); pleure
           ctx.arc(this.x + this.size, this.y, this.size,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
           ctx.fill();
-          ctx.fillStyle="#990000";
+          ctx.fillStyle="gray";
 
           var angle = Math.atan2((me.y - this.y),(me.x - this.x));
           ctx.beginPath();
@@ -52,11 +52,21 @@ class Badboy {
 
           ctx.restore();
 
-          ctx.fillStyle="orange";
+
           this.attacks.forEach(function(item){
             ctx.save();
-            ctx.translate(item.x-25, item.y-25);
-            ctx.fillRect(0,0,50,50);
+            //ctx.translate(item.x-25, item.y-25);
+            //ctx.fillRect(0,0,50,50);
+                    ctx.fillStyle="yellow";
+
+            ctx.beginPath();
+            ctx.arc(item.x - 20, item.y - 20, 40, 0, 2 * Math.PI);
+            ctx.fill();
+                    ctx.fillStyle = "orange";
+
+            ctx.beginPath();
+            ctx.arc(item.x -15, item.y - 15, 30, 0, 2 * Math.PI);
+            ctx.fill();
             ctx.restore();
           });
     }
@@ -80,7 +90,7 @@ class Badboy {
         } else {
             //on definit nouvelle destination
             this.xTarget = Math.floor(Math.random()*(canvas.width-this.size*2))+this.size;
-            this.yTarget = Math.floor(Math.random()*canvas.height/4)+this.size;
+            this.yTarget = Math.floor(Math.random()*(canvas.height/4-this.size*2))+this.size;
             var dxUnorm=this.xTarget - this.x;
             var dyUnorm= this.yTarget - this.y;
             var vectorNormalize = Math.sqrt((dxUnorm*dxUnorm)+(dyUnorm*dyUnorm));

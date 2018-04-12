@@ -50,9 +50,9 @@ defineGameListeners = function(){
         var dxUnorm=me.inputStates.mousePos.x - me.x;
         var dyUnorm=me.inputStates.mousePos.y - me.y;
         var vectorNormalize = Math.sqrt((dxUnorm*dxUnorm)+(dyUnorm*dyUnorm));
-        newAtk.dx = (dxUnorm/vectorNormalize)*20;
-        newAtk.dy = (dyUnorm/vectorNormalize)*20;
-        newAtk.size=100;
+        newAtk.dx = (dxUnorm/vectorNormalize)*22;
+        newAtk.dy = (dyUnorm/vectorNormalize)*22;
+        newAtk.size=10;
         me.attacks.push(newAtk);
     }, false);
 }
