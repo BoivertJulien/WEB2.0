@@ -117,4 +117,16 @@ class Badboy {
 
     }
 
+    ajustWhenResize(oldW,oldH){
+        console.log("->",this.x)
+
+        this.x = this.x / oldW * canvas.width;
+        this.y = this.y / oldH * canvas.height;
+        this.attacks.forEach(function(el){
+            el.x = el.x /oldW * canvas.width;
+            el.y = el.y / oldH * canvas.height;
+        });
+        this.moving = false;
+        console.log("fin->",this.x);
+    }
 }

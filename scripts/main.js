@@ -7,6 +7,7 @@ let analyser;
 let dataArray, bufferLength;
 let gradient;
 let state; //0 : paused OR 1 : playing
+let distanceMax;
 //menu var
 let cpt = 0;
 let txtA = "$> PRE$S 'SPACE' : |";

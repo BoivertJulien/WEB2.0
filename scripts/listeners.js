@@ -67,7 +67,12 @@ function getMousePos(evt) {
  }
 
 function resizeCanvas() {
+    var oldW = canvas.width;
+    var oldH = canvas.height;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     etoiles=[];
+    distanceMax = Math.sqrt((canvas.width*canvas.width)-(canvas.height*canvas.height));
+    if(me){me.ajustWhenResize(oldW,oldH);}
+    if(badboy){badboy.ajustWhenResize(oldW,oldH);console.log(badboy.x)}
 }
