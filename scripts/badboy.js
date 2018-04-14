@@ -1,5 +1,8 @@
 class Badboy {
     constructor() {
+        this.init();
+    }
+    init(){
         this.x = canvas.width / 2;
         this.y = canvas.height/4;
         this.size = 30;

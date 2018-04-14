@@ -30,12 +30,16 @@ defineGameListeners = function(){
             introPlayer.currentTime = 0;
             state = 1; // FLAG: Arretera l'ancienne animation
             Player.play();
+
             requestAnimationFrame(animation);
-        } else {
+        } else { 
             state = 0; // FLAG: Arretera l'ancienne animation
             Player.pause();
             Player.currentTime = 0;
             introPlayer.play();
+            bulletGAIN.gain.value =0;
+            me.init();
+            badboy.init();
             requestAnimationFrame(menu);
         }
     }
@@ -46,14 +50,19 @@ defineGameListeners = function(){
       me.inputStates.mousePos = getMousePos(event);
     }, false);
     canvas.addEventListener('mousedown', function (event) {
-        var newAtk = {x:me.x,y:me.y};
-        var dxUnorm=me.inputStates.mousePos.x - me.x;
-        var dyUnorm=me.inputStates.mousePos.y - me.y;
-        var vectorNormalize = Math.sqrt((dxUnorm*dxUnorm)+(dyUnorm*dyUnorm));
-        newAtk.dx = (dxUnorm/vectorNormalize)*22;
-        newAtk.dy = (dyUnorm/vectorNormalize)*22;
-        newAtk.size=10;
-        me.attacks.push(newAtk);
+        if (state == 1){
+            var newAtk = {x:me.x,y:me.y};
+            var dxUnorm=me.inputStates.mousePos.x - me.x;
+            var dyUnorm=me.inputStates.mousePos.y - me.y;
+            var vectorNormalize = Math.sqrt((dxUnorm*dxUnorm)+(dyUnorm*dyUnorm));
+            newAtk.dx = (dxUnorm/vectorNormalize)*22;
+            newAtk.dy = (dyUnorm/vectorNormalize)*22;
+            newAtk.size=10;
+            me.attacks.push(newAtk);
+            shootPlayer.pause();
+            shootPlayer.currentTime = 0;
+            shootPlayer.play();
+        }
     }, false);
 }
 
@@ -72,7 +81,7 @@ function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     etoiles=[];
-    distanceMax = Math.sqrt((canvas.width*canvas.width)-(canvas.height*canvas.height));
+    distanceMax = Math.sqrt((canvas.width*canvas.width)+(canvas.height*canvas.height));
     if(me){me.ajustWhenResize(oldW,oldH);}
     if(badboy){badboy.ajustWhenResize(oldW,oldH);console.log(badboy.x)}
 }

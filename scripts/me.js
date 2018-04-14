@@ -1,12 +1,15 @@
 class Me {
     constructor() {
+      this.init();
+    }
+
+    init(){
         this.x = canvas.width / 2;
         this.y = canvas.height/4*3;
         this.size = 75;
         this.life = 100;
         this.inputStates={};
         this.attacks = [];
-
     }
 
     draw(ctx) {

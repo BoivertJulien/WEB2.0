@@ -14,17 +14,52 @@ function buildAudioGraph() {
     //bqf.type = "lowpass";
     stereo = audioContext.createStereoPanner();
     stereo.pan.value = 0;
+
+
+      bulletOSC = audioContext.createOscillator();
+      bulletOSC.type="sawtooth";
+      bulletOSC.frequency.value = 512;
+
+      bulletGAIN = audioContext.createGain();
+      bulletGAIN.gain.value = 0;
+      bulletOSC.connect(bulletGAIN);
+        bulletGAIN.connect(audioContext.destination)
+    bulletOSC.start();
+
+
     sourceNode.connect(bqf);
-    bqf.connect(stereo);
-    stereo.connect(analyser);
-    analyser.connect(audioContext.destination);
+    bqf.connect(analyser);
+    analyser.connect(stereo);
+    stereo.connect(audioContext.destination);
 }
 
 function updateAudioEffects(){
     var distRelX = (me.x - badboy.x), distRelY = (me.y - badboy.y);
-    var distanceBADBOY =Math.sqrt(Math.abs(parseInt(distRelX*distRelX-distRelY*distRelY)))/distanceMax;
-    bqf.frequency.value = parseFloat(2048 + (distanceBADBOY*2048)).toPrecision(4); //POURQUOI cette erreur : "non-finite floating point" !! A demander
+    var distanceBADBOY =getDistance(distRelX,distRelY)/distanceMax;
+    bqf.frequency.value = 1024 + (distanceBADBOY*2048); //POURQUOI cette erreur : "non-finite floating point" !! A demander
     stereo.pan.value = (badboy.x-canvas.width/2)/(canvas.width/2);
+
+        if (badboy.attacks.length > 0){
+            
+            //on retient que la distance plus proche des attaques ennemies
+            var i=1,nearest = 0,distMin =getDistance(badboy.attacks[0].x - me.x,badboy.attacks[0].y-me.y);
+            badboy.attacks.forEach(function(el){
+                tmpDistMin = getDistance(el.x - me.x,el.y-me.y);
+                if (tmpDistMin < distMin) distMin = tmpDistMin;
+            });
+                
+            
+            var bullet = badboy.attacks[0];
+          var dist = getDistance(bullet.x - me.x,bullet.y - me.y)/distanceMax;
+          bulletOSC.frequency.value = 16+(1-dist)*64;
+          bulletGAIN.gain.value = Math.pow((1-dist),10);
+        } else {
+            bulletGAIN.gain.value = 0;
+        }
+}
+
+function getDistance(relX,relY){
+    return Math.sqrt(relX*relX+relY*relY);
 }
 
 function drawVolumeMeter() {
