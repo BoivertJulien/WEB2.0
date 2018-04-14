@@ -59,9 +59,9 @@ defineGameListeners = function(){
             newAtk.dy = (dyUnorm/vectorNormalize)*22;
             newAtk.size=10;
             me.attacks.push(newAtk);
-            shootPlayer.pause();
-            shootPlayer.currentTime = 0;
-            shootPlayer.play();
+
+            meShotPlayer.currentTime = 0;
+            meShotPlayer.play();
         }
     }, false);
 }

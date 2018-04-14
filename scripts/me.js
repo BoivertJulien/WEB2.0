@@ -56,6 +56,8 @@ class Me {
           this.life -= 1; 
           delete badboy.attacks[indexCollision];
           badboy.attacks.splice(indexCollision,1);
+          meImpactPlayer.currentTime = 0;
+          meImpactPlayer.play();
           if (this.life <= 0){}
         }
 

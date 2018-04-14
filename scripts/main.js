@@ -1,7 +1,7 @@
 window.onload = init;
 
 let audioCtx = window.AudioContext || window.webkitAudioContext;
-let canvas, ctx, audioContext, introPlayer, Player,bqf,shootPlayer,bulletOSC,bulletGAIN;
+let canvas, ctx, audioContext, introPlayer, Player,bqf,meShotPlayer,badboyShotPlayer,meImpactPlayer,badboyImpactPlayer,bulletOSC,bulletGAIN;
 let etoiles = [];
 let analyser;
 let dataArray, bufferLength;
@@ -25,8 +25,15 @@ function init() {
     canvas = document.querySelector("#myCanvas");
     Player = new Audio('songs/voodooo.mp3');
     introPlayer = new Audio('songs/intro.mp3');
-    shootPlayer = new Audio('songs/shoot.wav');
-    shootPlayer.volume = 0.2;
+    meShotPlayer = new Audio('songs/meShot.mp3');
+    meShotPlayer.volume = 0.3;
+    badboyShotPlayer = new Audio('songs/badboyShot.mp3');
+    badboyShotPlayer.volume = 0.4;
+
+
+    meImpactPlayer = new Audio('songs/meImpact.mp3');
+    badboyImpactPlayer = new Audio('songs/badboyImpact.mp3');
+
     introPlayer.loop = true;
     introPlayer.play();
 

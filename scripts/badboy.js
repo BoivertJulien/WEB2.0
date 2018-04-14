@@ -89,6 +89,9 @@ class Badboy {
                 newAtk.dy = (dyUnorm/vectorNormalize)*20;
                 newAtk.size=10;
                 this.attacks.push(newAtk);
+
+                badboyShotPlayer.currentTime = 0;
+                badboyShotPlayer.play();
           }
         } else {
             //on definit nouvelle destination
@@ -109,6 +112,9 @@ class Badboy {
           delete me.attacks[indexCollision];
           me.attacks.splice(indexCollision,1);
 
+            badboyImpactPlayer.currentTime = 0;
+            badboyImpactPlayer.play();
+            
           if (this.life <= 0){ }
         }
 
