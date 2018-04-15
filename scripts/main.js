@@ -26,7 +26,7 @@ function init() {
     Player = new Audio('songs/voodooo.mp3');
     introPlayer = new Audio('songs/intro.mp3');
     meShotPlayer = new Audio('songs/meShot.mp3');
-    meShotPlayer.volume = 0.3;
+    meShotPlayer.volume = 0.4;
     badboyShotPlayer = new Audio('songs/badboyShot.mp3');
     badboyShotPlayer.volume = 0.4;
 

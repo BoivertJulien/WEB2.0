@@ -5,7 +5,7 @@ class Badboy {
     init(){
         this.x = canvas.width / 2;
         this.y = canvas.height/4;
-        this.size = 30;
+        this.size = 100;
         this.life = 100;
         this.inputStates={};
         this.attacks = [];
@@ -23,34 +23,40 @@ class Badboy {
         // la fin
         ctx.save();
 
-          ctx.fillStyle = "orange";
+ gradient = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.size/2);
+ gradient.addColorStop(0, 'rgba(0,0,0,1)');
+ gradient.addColorStop(0.70, 'rgba(255, 0, 0,0.8)');
+ gradient.addColorStop(1, 'rgba(255, 200, 200,0.6)');
+ ctx.fillStyle = gradient;          
+
           ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size*2,0, 2 * Math.PI);
+          ctx.arc(this.x, this.y, this.size/2,0, 2 * Math.PI);
           ctx.fill();
           ctx.beginPath();
-          ctx.arc(this.x, this.y+this.size*2, this.size/2,0, 2 * Math.PI);
+          ctx.arc(this.x, this.y+this.size/2, this.size/8,0, 2 * Math.PI);
           ctx.fill();
-          ctx.fillStyle="lightblue";
+
+          ctx.fillStyle="red";
           ctx.beginPath();
-          ctx.arc(this.x, this.y+this.size*2, this.size/3,0, 2 * Math.PI);
+          ctx.arc(this.x, this.y+this.size/2, this.size/16,0, 2 * Math.PI);
           ctx.fill();
-          ctx.fillStyle="white";
+          ctx.fillStyle="black";
           ctx.beginPath();
           //ctx.arc(this.x - this.size, this.y, this.size,2*Math.PI-Math.PI/8,Math.PI); pleure
-          ctx.arc(this.x - this.size, this.y, this.size,Math.PI/8,Math.PI+Math.PI/8);//colere
+          ctx.arc(this.x - this.size/4, this.y, this.size/3,Math.PI/8,Math.PI+Math.PI/8);//colere
           ctx.fill();
           ctx.beginPath();
           //ctx.arc(this.x + this.size, this.y, this.size,0, Math.PI+Math.PI/8); pleure
-          ctx.arc(this.x + this.size, this.y, this.size,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
+          ctx.arc(this.x + this.size/4, this.y, this.size/3,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
           ctx.fill();
-          ctx.fillStyle="gray";
+          ctx.fillStyle="white";
 
           var angle = Math.atan2((me.y - this.y),(me.x - this.x));
           ctx.beginPath();
-          ctx.arc(this.x - this.size + this.size/2*Math.cos(angle), this.y+this.size/2*Math.sin(angle), this.size/4,0, 2 * Math.PI);
+          ctx.arc(this.x - this.size/4 + this.size/6*Math.cos(angle), this.y+this.size/4*Math.sin(angle), this.size/12,0, 2 * Math.PI);
           ctx.fill();
           ctx.beginPath();
-          ctx.arc(this.x + this.size + this.size/2*Math.cos(angle), this.y+this.size/2*Math.sin(angle), this.size/4,0, 2 * Math.PI);
+          ctx.arc(this.x + this.size/4 + this.size/6*Math.cos(angle), this.y+this.size/4*Math.sin(angle), this.size/12,0, 2 * Math.PI);
           ctx.fill();
 
           ctx.restore();
@@ -60,15 +66,15 @@ class Badboy {
             ctx.save();
             //ctx.translate(item.x-25, item.y-25);
             //ctx.fillRect(0,0,50,50);
-                    ctx.fillStyle="yellow";
+            ctx.fillStyle="yellow";
 
             ctx.beginPath();
-            ctx.arc(item.x - 20, item.y - 20, 40, 0, 2 * Math.PI);
+            ctx.arc(item.x, item.y, 30, 0, 2 * Math.PI);
             ctx.fill();
-                    ctx.fillStyle = "orange";
+            ctx.fillStyle = "orange";
 
             ctx.beginPath();
-            ctx.arc(item.x -15, item.y - 15, 30, 0, 2 * Math.PI);
+            ctx.arc(item.x, item.y, 20, 0, 2 * Math.PI);
             ctx.fill();
             ctx.restore();
           });

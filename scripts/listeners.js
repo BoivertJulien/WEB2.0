@@ -83,5 +83,5 @@ function resizeCanvas() {
     etoiles=[];
     distanceMax = Math.sqrt((canvas.width*canvas.width)+(canvas.height*canvas.height));
     if(me){me.ajustWhenResize(oldW,oldH);}
-    if(badboy){badboy.ajustWhenResize(oldW,oldH);console.log(badboy.x)}
+    if(badboy){badboy.ajustWhenResize(oldW,oldH);}
 }
