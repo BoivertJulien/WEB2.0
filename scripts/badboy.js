@@ -6,7 +6,7 @@ class Badboy {
         this.x = canvas.width / 2;
         this.y = canvas.height/4;
         this.size = 100;
-        this.life = 100;
+        this.life = 50;
         this.inputStates={};
         this.attacks = [];
         this.vitesseX = 0; // en pixels par image d'animation
@@ -23,11 +23,11 @@ class Badboy {
         // la fin
         ctx.save();
 
- gradient = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.size/2);
- gradient.addColorStop(0, 'rgba(0,0,0,1)');
- gradient.addColorStop(0.70, 'rgba(255, 0, 0,0.8)');
- gradient.addColorStop(1, 'rgba(255, 200, 200,0.6)');
- ctx.fillStyle = gradient;          
+       gradient = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.size/2);
+       gradient.addColorStop(0, 'rgba(0,0,0,1)');
+       gradient.addColorStop(0.70, 'rgba(255, 0, 0,0.8)');
+       gradient.addColorStop(1, 'rgba(255, 200, 200,0.6)');
+       ctx.fillStyle = gradient;          
 
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size/2,0, 2 * Math.PI);
@@ -40,7 +40,7 @@ class Badboy {
           ctx.beginPath();
           ctx.arc(this.x, this.y+this.size/2, this.size/16,0, 2 * Math.PI);
           ctx.fill();
-          ctx.fillStyle="black";
+          ctx.fillStyle="white";
           ctx.beginPath();
           //ctx.arc(this.x - this.size, this.y, this.size,2*Math.PI-Math.PI/8,Math.PI); pleure
           ctx.arc(this.x - this.size/4, this.y, this.size/3,Math.PI/8,Math.PI+Math.PI/8);//colere
@@ -49,7 +49,7 @@ class Badboy {
           //ctx.arc(this.x + this.size, this.y, this.size,0, Math.PI+Math.PI/8); pleure
           ctx.arc(this.x + this.size/4, this.y, this.size/3,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
           ctx.fill();
-          ctx.fillStyle="white";
+          ctx.fillStyle="green";
 
           var angle = Math.atan2((me.y - this.y),(me.x - this.x));
           ctx.beginPath();
@@ -78,6 +78,15 @@ class Badboy {
             ctx.fill();
             ctx.restore();
           });
+
+          ctx.fillStyle = "red";
+          for (var i=0;i<this.life;i++){
+            drawHeart(10*i+50, 50, 20, 20,"red");
+          }
+          ctx.fillStyle = "white";
+          ctx.font="40px sans-serif";
+          ctx.fillText(this.life,30,115);
+
     }
 
     update(){
@@ -120,8 +129,10 @@ class Badboy {
 
             badboyImpactPlayer.currentTime = 0;
             badboyImpactPlayer.play();
-            
-          if (this.life <= 0){ }
+          if (this.life <= 0){
+            win = true;
+            stopAnimation();
+          }
         }
 
 
@@ -155,3 +166,4 @@ class Badboy {
         console.log("fin->",this.x);
     }
 }
+

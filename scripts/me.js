@@ -7,7 +7,7 @@ class Me {
         this.x = canvas.width / 2;
         this.y = canvas.height/4*3;
         this.size = 75;
-        this.life = 100;
+        this.life = 3;
         this.inputStates={};
         this.attacks = [];
     }
@@ -32,6 +32,14 @@ class Me {
           ctx.fillRect(0,0,16,16);
           ctx.restore();
         });
+
+          ctx.fillStyle = "green";
+          for (var i=0;i<this.life;i++){
+            drawHeart(canvas.width-100*i-50, 50, 75, 75,"green");
+          }
+          ctx.fillStyle = "white";
+          ctx.font="40px sans-serif";
+          ctx.fillText(this.life,canvas.width-30,115);
     }
 
     update(){
@@ -58,7 +66,10 @@ class Me {
           badboy.attacks.splice(indexCollision,1);
           meImpactPlayer.currentTime = 0;
           meImpactPlayer.play();
-          if (this.life <= 0){}
+          if (this.life <= 0){
+            win = false;
+            stopAnimation();
+          }
         }
 
           var toremove = [];

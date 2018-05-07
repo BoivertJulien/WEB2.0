@@ -43,12 +43,15 @@ function init() {
     audioContext = new audioCtx();
     buildAudioGraph();
 
-    // 3 on dessine pour verifier que ca marche
-    //ctx.fillStyle = 'red';
-    //ctx.fillRect(10, 10, 100, 100);
+    // CHARGEMENT DES IMAGES
+    COP=document.getElementById("COP");
+    SHIP=document.getElementById("SHIP");
+    WIN=document.getElementById("WIN");
+    LOOSE=document.getElementById("LOOSE");
 
     // Draw canvas border for the first time.
     resizeCanvas();
+
     me=new Me();
     badboy= new Badboy();
 

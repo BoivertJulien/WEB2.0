@@ -26,21 +26,10 @@ defineGameListeners = function(){
      me.inputStates.down = false;
     } else if (event.keyCode === 32) {
         if (state == 0){
-            introPlayer.pause();
-            introPlayer.currentTime = 0;
-            state = 1; // FLAG: Arretera l'ancienne animation
-            Player.play();
-
-            requestAnimationFrame(animation);
+          startAnimation();
         } else { 
-            state = 0; // FLAG: Arretera l'ancienne animation
-            Player.pause();
-            Player.currentTime = 0;
-            introPlayer.play();
-            bulletGAIN.gain.value =0;
-            me.init();
-            badboy.init();
-            requestAnimationFrame(menu);
+          win = undefined;
+          stopAnimation();
         }
     }
     }, false);
@@ -64,6 +53,23 @@ defineGameListeners = function(){
             meShotPlayer.play();
         }
     }, false);
+}
+function stopAnimation(){
+  state = 0; // FLAG: Arretera l'ancienne animation
+  Player.pause();
+  Player.currentTime = 0;
+  introPlayer.play();
+  bulletGAIN.gain.value =0;
+  me.init();
+  badboy.init();
+  requestAnimationFrame(menu);
+}
+function startAnimation(){
+            introPlayer.pause();
+            introPlayer.currentTime = 0;
+            state = 1; // FLAG: Arretera l'ancienne animation
+            Player.play();
+            requestAnimationFrame(animation);
 }
 
 function getMousePos(evt) {
