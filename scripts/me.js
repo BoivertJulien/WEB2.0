@@ -6,7 +6,7 @@ class Me {
     init(){
         this.x = canvas.width / 2;
         this.y = canvas.height/4*3;
-        this.size = 75;
+        this.size = 100;
         this.life = 3;
         this.inputStates={};
         this.attacks = [];
@@ -17,10 +17,11 @@ class Me {
         ctx.save();
         ctx.fillStyle="pink";
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.translate(-this.size/2, -this.size/2);
-        ctx.strokeRect(0, 0, this.size, this.size);
-        ctx.fillRect(this.size/4, this.size/4, this.size/2, this.size/2);
+        ctx.rotate(this.angle-Math.PI/2);
+        //ctx.translate(-this.size/2, -this.size/2);
+        //ctx.strokeRect(0, 0, this.size, this.size);
+        //ctx.fillRect(this.size/4, this.size/4, this.size/2, this.size/2);
+        ctx.drawImage(SHIP,-this.size/2, -this.size/2,this.size,this.size);
 
         ctx.restore();
 
@@ -32,7 +33,7 @@ class Me {
           ctx.fillRect(0,0,16,16);
           ctx.restore();
         });
-
+        //draw life
           ctx.fillStyle = "green";
           for (var i=0;i<this.life;i++){
             drawHeart(canvas.width-100*i-50, 50, 75, 75,"green");

@@ -48,7 +48,7 @@ function init() {
     SHIP=document.getElementById("SHIP");
     WIN=document.getElementById("WIN");
     LOOSE=document.getElementById("LOOSE");
-
+    meIMG=document.getElementById("ME");
     // Draw canvas border for the first time.
     resizeCanvas();
 

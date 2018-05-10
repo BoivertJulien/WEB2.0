@@ -5,7 +5,7 @@ class Badboy {
     init(){
         this.x = canvas.width / 2;
         this.y = canvas.height/4;
-        this.size = 100;
+        this.size = 120;
         this.life = 50;
         this.inputStates={};
         this.attacks = [];
@@ -40,23 +40,30 @@ class Badboy {
           ctx.beginPath();
           ctx.arc(this.x, this.y+this.size/2, this.size/16,0, 2 * Math.PI);
           ctx.fill();
+
+          var angle = Math.atan2((me.y - this.y),(me.x - this.x));
           ctx.fillStyle="white";
           ctx.beginPath();
           //ctx.arc(this.x - this.size, this.y, this.size,2*Math.PI-Math.PI/8,Math.PI); pleure
-          ctx.arc(this.x - this.size/4, this.y, this.size/3,Math.PI/8,Math.PI+Math.PI/8);//colere
+          ctx.arc(this.x - this.size/3, this.y, this.size/3,Math.PI/8,Math.PI+Math.PI/8);//colere
           ctx.fill();
-          ctx.beginPath();
-          //ctx.arc(this.x + this.size, this.y, this.size,0, Math.PI+Math.PI/8); pleure
-          ctx.arc(this.x + this.size/4, this.y, this.size/3,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
-          ctx.fill();
+          ctx.clip();
           ctx.fillStyle="green";
-
-          var angle = Math.atan2((me.y - this.y),(me.x - this.x));
           ctx.beginPath();
-          ctx.arc(this.x - this.size/4 + this.size/6*Math.cos(angle), this.y+this.size/4*Math.sin(angle), this.size/12,0, 2 * Math.PI);
+          ctx.arc(this.x - this.size/3 + this.size/6*Math.cos(angle), this.y+this.size/4*Math.sin(angle), this.size/12,0, 2 * Math.PI);
           ctx.fill();
+
+          ctx.restore();
+          ctx.save();
+          ctx.fillStyle="white";
+          ctx.beginPath(); 
+          //ctx.arc(this.x + this.size, this.y, this.size,0, Math.PI+Math.PI/8); pleure
+          ctx.arc(this.x + this.size/3, this.y, this.size/3,2*Math.PI-Math.PI/8,Math.PI-Math.PI/8);//colere
+          ctx.fill();
+          ctx.clip();
+          ctx.fillStyle="green";
           ctx.beginPath();
-          ctx.arc(this.x + this.size/4 + this.size/6*Math.cos(angle), this.y+this.size/4*Math.sin(angle), this.size/12,0, 2 * Math.PI);
+          ctx.arc(this.x + this.size/3 + this.size/6*Math.cos(angle), this.y+this.size/4*Math.sin(angle), this.size/12,0, 2 * Math.PI);
           ctx.fill();
 
           ctx.restore();
@@ -86,6 +93,7 @@ class Badboy {
           ctx.fillStyle = "white";
           ctx.font="40px sans-serif";
           ctx.fillText(this.life,30,115);
+
 
     }
 
