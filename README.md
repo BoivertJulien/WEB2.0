@@ -1,7 +1,8 @@
 # WEB2.0
 -----------------------------------------------
 ----- QUI A FAIS QUOI ? -----------------------
-
+Long: je m'occupe de tous ce qui est graphique en générale: l'arc en ciel, les étoiles, le méchant, la fusée, les tirs, le menu, les vies, et les intéractions avec le clavier et la souris
+Julien: je m'occupe du moteur de jeu, et la partie audio, ainsi que les animations en fonction du rythme de l'audio. Et aussi les parties mathématiques compliqués comme les transformations uniforme des vecteurs.
 
 -----------------------------------------------
 ----- POINTS FORTS : --------------------------
