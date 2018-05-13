@@ -69,7 +69,7 @@ function init() {
 // typiquement dans game.js
 function animation(time) {
     clearCanvas();
-    
+
     updateAudioEffects();
     dessineEtDeplaceLesEtoiles();
     drawVolumeMeter();
